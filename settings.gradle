@@ -1,0 +1,15 @@
+rootProject.name = 'korau-atrac3plus-root'
+
+include(
+		'korau-atrac3plus-common',
+		'korau-atrac3plus',
+		'korau-atrac3plus-js',
+)
+
+def register(String base) {
+	findProject(":$base-common")?.projectDir = file("$base/common")
+	findProject(":$base")?.projectDir = file("$base/jvm")
+	findProject(":$base-js")?.projectDir = file("$base/js")
+}
+
+register('korau-atrac3plus')

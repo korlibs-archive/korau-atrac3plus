@@ -1,0 +1,8 @@
+apply plugin: 'kotlin-platform-jvm'
+
+dependencies {
+    expectedBy project(":korau-atrac3plus-common")
+
+    compile "com.soywiz:korau:$korauVersion"
+    compile "com.soywiz:klogger:$kloggerVersion"
+}
