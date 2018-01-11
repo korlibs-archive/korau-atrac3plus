@@ -1,14 +1,12 @@
 package com.soywiz.korau.format.atrac3plus.util
 
-import com.soywiz.klogger.LogLevel
 import com.soywiz.klogger.Logger
-import com.soywiz.korau.format.util.String_format
+import com.soywiz.kmem.extract8
 import com.soywiz.korio.lang.format
 import com.soywiz.korio.stream.SyncStream
 import com.soywiz.korio.stream.readS32_le
 import com.soywiz.korio.stream.readU16_le
 import com.soywiz.korio.stream.readU8
-import com.soywiz.korio.util.extract8
 
 /**
  * From JPCSP
@@ -85,7 +83,7 @@ object Atrac3PlusUtil {
 		val WAVEMagic = readUnaligned32(mem, currentAddr + 8)
 		if (magic != RIFF_MAGIC || WAVEMagic != WAVE_MAGIC) {
 			//log.error(String_format("Not a RIFF/WAVE format! %s", Utilities.getMemoryDump(currentAddr, 16)))
-			log.error(String_format("Not a RIFF/WAVE format!"))
+            log.error { "Not a RIFF/WAVE format!" }
 			return ERROR_ATRAC_UNKNOWN_FORMAT
 		}
 
@@ -124,7 +122,7 @@ object Atrac3PlusUtil {
 						if (extraDataSize == 14) {
 							info.atracCodingMode = mem.read16(currentAddr + 18 + 6)
 						}
-						if (LogLevel.TRACE.index <= log.processedLevel.index) {
+						if (log.isTraceEnabled) {
 							log.trace { "WAVE format: magic=0x%08X('%s'), chunkSize=%d, compressionCode=0x%04X, channels=%d, sampleRate=%d, bitrate=%d, bytesPerFrame=0x%X, hiBytesPerSample=%d, codingMode=%d".format(chunkMagic, getStringFromInt32(chunkMagic), chunkSize, compressionCode, info.atracChannels, info.atracSampleRate, info.atracBitrate, info.atracBytesPerFrame, hiBytesPerSample, info.atracCodingMode) }
 							// Display rest of chunk as debug information
 							val restChunk = StringBuilder()

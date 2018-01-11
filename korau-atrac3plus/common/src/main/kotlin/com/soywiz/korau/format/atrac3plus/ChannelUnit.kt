@@ -2,6 +2,7 @@ package com.soywiz.korau.format.atrac3plus
 
 import com.soywiz.kmem.arraycopy
 import com.soywiz.kmem.fill
+import com.soywiz.kmem.signExtend
 import com.soywiz.korau.format.atrac3plus.Atrac3plusData1.atrac3p_spectra_tabs
 import com.soywiz.korau.format.atrac3plus.Atrac3plusData2.atrac3p_ct_restricted_to_full
 import com.soywiz.korau.format.atrac3plus.Atrac3plusData2.atrac3p_qu_num_to_seg
@@ -22,7 +23,6 @@ import com.soywiz.korau.format.atrac3plus.Atrac3plusDsp.Companion.ff_atrac3p_sf_
 import com.soywiz.korau.format.util.*
 import com.soywiz.korau.format.util.CodecUtils.avLog2
 import com.soywiz.korio.lang.format
-import com.soywiz.korio.util.signExtend
 import kotlin.math.abs
 
 /*
